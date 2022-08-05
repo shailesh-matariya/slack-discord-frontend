@@ -15,24 +15,27 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import logo from "../../public/assets/images/fleetdm-logo.png";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Avatar from '@mui/material/Avatar';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.white, 1),
     '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
+        backgroundColor: alpha(theme.palette.common.white),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
+    color: 'lightgray',
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
         // width: 'auto',
@@ -47,6 +50,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: '#9ca6b4',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -165,27 +169,28 @@ const Header = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
+            <AppBar position="static" sx={{ backgroundColor: '#1e1e43', boxShadow: 'none' }}>
+                <Toolbar sx={{ Height: 75, padding: 2 }}>
                     <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{ mr: 2 }}
+                        sx={{ mr: 2, display: { xs: 'inline-flex', sm: 'none' } }}
                     >
                         <MenuIcon />
                     </IconButton>
 
-                    <img src={logo} alt="Logo" />
+                    <img alt="complex" src="/assets/images/fleetdm-logo.png" height={30} />
 
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
                         <StyledInputBase
-                            placeholder="Search…"
+                            placeholder="Search messages"
                             inputProps={{ 'aria-label': 'search' }}
+                            sx={{ color: '#090707', fontSize: 'medium' }}
                         />
                     </Search>
 
@@ -199,16 +204,35 @@ const Header = () => {
                         ))}
                     </List> */}
 
-                    <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                        {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#fff' }}>
-                                {item}
-                            </Button>
-                        ))}
-                        <Button variant="contained" startIcon={<DeleteIcon />} color="success">
-                            Join the coversation
+                    {navItems.map((item) => (
+                        <Button key={item} sx={{ color: '#fff', fontWeight: 'bold', textTransform: 'none', fontSize: 'medium' }}>
+                            {item}
+                        </Button>
+                    ))}
+
+                    <Box sx={{ display: { xs: 'none', sm: 'inline-flex' }, ml: 2 }}>
+                        <Button spacing={2} style={{ display: 'inline-flex', backgroundColor: 'white' }}>
+                            <img alt="complex" src="/assets/images/slack.png" height={15} />
+                            <Typography sx={{ textTransform: 'none', ml: 1, fontWeight: 'bold', color: 'blue', fontSize: 'small' }} noWrap>Join the conversation</Typography>
                         </Button>
                     </Box>
+
+                    {/* <StyledPaper
+                        sx={{
+                            my: 1,
+                            mx: 'auto',
+                            p: 2,
+                        }}
+                    >
+                        <Grid container wrap="nowrap" spacing={2}>
+                            <Grid item>
+                                <img alt="complex" src="/assets/images/slack.png" height={20} />
+                            </Grid>
+                            <Grid item xs>
+                                <Typography noWrap>Join the conversation</Typography>
+                            </Grid>
+                        </Grid>
+                    </StyledPaper> */}
 
 
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -225,6 +249,7 @@ const Header = () => {
                     </Box>
                 </Toolbar>
             </AppBar>
+
             {renderMobileMenu}
             {renderMenu}
         </Box>
