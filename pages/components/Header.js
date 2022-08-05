@@ -28,7 +28,7 @@ import Avatar from '@mui/material/Avatar';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 1),
+    backgroundColor: alpha(theme.palette.common.white),
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white),
     },
@@ -194,16 +194,6 @@ const Header = () => {
                         />
                     </Search>
 
-                    {/* <List>
-                        {navItems.map((item) => (
-                            <ListItem key={item} disablePadding>
-                                <ListItemButton sx={{ textAlign: 'center' }}>
-                                    <ListItemText primary={item} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List> */}
-
                     {navItems.map((item) => (
                         <Button key={item} sx={{ color: '#fff', fontWeight: 'bold', textTransform: 'none', fontSize: 'medium' }}>
                             {item}
@@ -216,24 +206,6 @@ const Header = () => {
                             <Typography sx={{ textTransform: 'none', ml: 1, fontWeight: 'bold', color: 'blue', fontSize: 'small' }} noWrap>Join the conversation</Typography>
                         </Button>
                     </Box>
-
-                    {/* <StyledPaper
-                        sx={{
-                            my: 1,
-                            mx: 'auto',
-                            p: 2,
-                        }}
-                    >
-                        <Grid container wrap="nowrap" spacing={2}>
-                            <Grid item>
-                                <img alt="complex" src="/assets/images/slack.png" height={20} />
-                            </Grid>
-                            <Grid item xs>
-                                <Typography noWrap>Join the conversation</Typography>
-                            </Grid>
-                        </Grid>
-                    </StyledPaper> */}
-
 
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
