@@ -6,11 +6,11 @@ import { styled, alpha } from '@mui/material/styles';
 
 const Chat = () => {
   const channels = [{
-    id: 1, name: 'Channel 1'
+    id: 1, name: 'channel-one'
   }, {
-    id: 2, name: 'Channel 2'
+    id: 2, name: 'channel-two'
   }, {
-    id: 3, name: 'Channel 3'
+    id: 3, name: 'channel-three'
   }, {
     id: 4, name: 'Channel 4'
   }, {
