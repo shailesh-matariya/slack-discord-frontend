@@ -5,7 +5,9 @@ import { border, borderRight } from '@mui/system';
 
 const ChannellList = styled('div')(({ theme }) => ({
   padding: '0 20px',
-  width: '250px',
+  [theme.breakpoints.up('md')]: {
+    width: '250px',
+  },
 }));
 
 const ChannelTitle = styled('div')(({ theme }) => ({
@@ -18,36 +20,42 @@ const ChannelCard = styled('div')(({ theme }) => ({
   background: '#fff',
   borderRadius: '0.25rem',
   boxShadow: '0 1px 3px rgb(0 0 0 / 5%), 0 20px 25px -5px rgb(0 0 0 / 5%), 0 10px 10px -5px rgb(0 0 0 / 4%)',
-  maxWidth: '28rem',
+  [theme.breakpoints.up('md')]: {
+    maxWidth: '28rem',
+  },
   margin: '0 auto'
 }));
 
-const Channels = ({ list }) => {
-  const Channel = ({ ch }) => {
-    return <ListItem sx={{ p: 0 }}>
-      <ListItemButton
-        component="a"
-        href={`/chat/${ch.name}`}
-        sx={{ p: 0 }} >
-        <ListItemText
-          sx={{
-            p: 0,
-            m: 0,
-            borderLeft: 3,
-            borderColor: 'transparent',
-            padding: '0.5rem 1rem',
-            fontSize: '14px',
-            fontWeight: 500
-          }}>
-          # {ch.name}
-        </ListItemText>
-      </ListItemButton>
-    </ListItem>
-  }
+const Channel = ({ ch }) => {
+  return <ListItem sx={{ p: 0 }}>
+    <ListItemButton
+      component="a"
+      href={`/chat/${ch.name}`}
+      sx={{ p: 0 }} >
+      <ListItemText
+        sx={{
+          p: 0,
+          m: 0,
+          borderLeft: 3,
+          borderColor: 'transparent',
+          padding: '0.5rem 1rem',
+          fontSize: '14px',
+          fontWeight: 500,
+          '&:active': {
+            borderColor: '#0f5091',
+            color: '#0f5091'
+          },
+        }}>
+        # {ch.name}
+      </ListItemText>
+    </ListItemButton>
+  </ListItem>
+}
 
+const Channels = ({ list }) => {
   return (
     <>
-      <ChannellList>
+      <ChannellList sx={{ display: 'block' }}>
         <ChannelCard>
           <div style={{ padding: '24px 0', width: '100%' }}>
             <ChannelTitle>

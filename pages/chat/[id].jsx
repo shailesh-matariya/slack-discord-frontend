@@ -5,10 +5,10 @@ import Chat from '../../routes/chat';
 const ChatPage = () => {
   const router = useRouter();
   const { id } = router.query;
-
+  // console.log("id" , router);
   return (
     <>
-      <Chat id={id} />;
+         <Chat id={id} />
     </>
   )
 }

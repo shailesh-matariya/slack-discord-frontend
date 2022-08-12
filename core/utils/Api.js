@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { message } from 'antd';
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+// export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const API_URL = 'http://192.168.29.155:8000/api';
 export const httpClient = axios.create({
   baseURL: API_URL,
   headers: {
@@ -24,16 +24,16 @@ httpClient.interceptors.response.use(
       case 401:
         throw new Error(apiMessage);
       case 500:
-        message.error('Internal Server Error');
+        console.error('Internal Server Error');
         break;
       case 502:
-        message.error('Bad Gateway');
+        console.error('Bad Gateway');
         break;
       case 503:
-        message.error('Service Unavailable');
+        console.error('Service Unavailable');
         break;
       default:
-        message.error(apiMessage);
+        console.error(apiMessage);
         break;
     }
 
