@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import { Box } from "@mui/system";
+import Emoji, { toArray } from 'react-emoji-render';
 
 const ExpandMore = styled((props) => {
   return <IconButton {...props} sx={{ fontSize: 6 }} />;
@@ -19,12 +20,32 @@ const ExpandMore = styled((props) => {
   marginLeft: "auto",
 }));
 
-const UserName = ({ name }) => {
-  return <span style={{ fontWeight: "bold", color: "#000" }}>{name}</span>;
-};
-
 const Dialog = ({ msgDetail, users }) => {
-  const [user] = users.filter((user) => user.userId === msgDetail.userId);
+  const usersMap = {};
+  users.forEach(user => {
+    usersMap[user.userId] = user;
+  });
+
+  const user = usersMap[msgDetail.userId];
+  const msg = msgDetail.message;
+  const message = msg.replace(/<@(.*?)>/g, function replacer(match, p1) {
+    return `<strong>@${usersMap[p1]?.username}</strong>`;
+  });
+
+  const parseEmojis = value => {
+    const emojisArray = toArray(value);
+
+    // toArray outputs React elements for emojis and strings for other
+    const newValue = emojisArray.reduce((previous, current) => {
+      if (typeof current === "string") {
+        return previous + current;
+      }
+      return previous + current.props.children;
+    }, "");
+
+    return newValue;
+  };
+
   return (
     <>
       <div key={msgDetail.id}>
@@ -72,10 +93,7 @@ const Dialog = ({ msgDetail, users }) => {
                   fontSize: "14px",
                 }}
               >
-                {user?.username}
-                {msgDetail?.message.split(">")[1]}
-                <br></br>
-                {msgDetail?.message}
+                <div dangerouslySetInnerHTML={{ __html: parseEmojis(message) }}></div>
               </Box>
             </CardContent>
             <CardActions sx={{ ml: 7 }}>

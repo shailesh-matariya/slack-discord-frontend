@@ -11,7 +11,7 @@ const msgList = [
   {
     id: 1,
     account_channel_id: 1,
-    message: "<@U03SMDS1SUA> has joined the channel",
+    message: "<@U03SMDS1SUA>, <@U03RPSESW1M>, <@U03S6SH5W0L>  has joined the channel",
     type: "message",
     userId: "U03SMDS1SUA",
     ts: "1660025371.233229",
@@ -72,7 +72,7 @@ const msgList = [
   {
     id: 7,
     account_channel_id: 1,
-    message: "<@U03SU5F76GG> has joined the channel",
+    message: "<@U03SU5F76GG>, <@U03RPSESW1M> has joined the channel",
     type: "message",
     userId: "U03SU5F76GG",
     ts: "1659556446.724389",
