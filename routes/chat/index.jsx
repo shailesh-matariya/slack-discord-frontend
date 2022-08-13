@@ -4,8 +4,8 @@ import Channels from "../../core/components/Channels";
 import Conversation from "../../core/components/Conversation";
 import { styled, alpha } from "@mui/material/styles";
 import { httpClient } from "../../core/utils/Api";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Head from 'next/head';
 
 const msgList = [
   {
@@ -132,12 +132,11 @@ const msgList = [
 ];
 
 const Chat = ({ id }) => {
-  // console.log(id);
   const [channels, setChannels] = useState([]);
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-
-  const query = useRouter();
+  const [selectedChannel, setSelectedChannel] = useState();
+  var ch;
 
   const getChannels = () => {
     httpClient
@@ -145,15 +144,22 @@ const Chat = ({ id }) => {
       .then(({ data }) => {
         const channels = data.channel_collection;
         setChannels(channels);
-        if (!id) getMassages(channels[0].id);
+        if (!id) {
+          ch = channels[0];
+        } else {
+          ch = channels.find(ch => ch.channelId === id || ch.name === id);
+        }
+
+        setSelectedChannel(ch);
+        getMassages(ch.id);
       });
   };
 
   const getMassages = (chId) => {
-    // httpClient
-    // .get(`/channel-messages?platform=slack&team_id=T03SH2Y8PJM&channel_id=${chId}`)
-    // .then((resp) => setMessages(resp.data.message_collection.data));
-    setMessages(msgList);
+    httpClient
+    .get(`/channel-messages?platform=slack&team_id=T03SH2Y8PJM&channel_id=${chId}`)
+    .then((resp) => setMessages(resp.data.message_collection.data));
+    // setMessages(msgList);
   };
 
   const getUsers = () => {
@@ -165,10 +171,6 @@ const Chat = ({ id }) => {
   useEffect(() => {
     getChannels();
     getUsers();
-
-    if (!id) return;
-
-    getMassages(id);
   }, []);
 
   const ConversationWrapper = styled("div")(({ theme }) => ({
@@ -180,24 +182,31 @@ const Chat = ({ id }) => {
   }));
 
   return (
-    <Grid container>
-      <Grid
-        item
-        md={2}
-        xs={12}
-        sx={{ display: { lg: "flex", xs: "hidden" }, display: "block" }}
-      >
-        <Channels list={channels} />
-      </Grid>
+    <>
+      <Head>
+        <title>Satish</title>
+        {/* <title>{selectedChannel?.name}</title>
+        <meta property="og:title" content={selectedChannel?.name} key="title" /> */}
+      </Head>
+      <Grid container>
+        <Grid
+          item
+          md={2}
+          xs={12}
+          sx={{ display: { lg: "flex", xs: "hidden" }, display: "block" }}
+        >
+          <Channels list={channels} />
+        </Grid>
 
-      <Grid item md={10} xs={12} sx={{ display: "inset" }}>
-        <Container>
-          <ConversationWrapper>
-            <Conversation messages={messages} users={users} />
-          </ConversationWrapper>
-        </Container>
+        <Grid item md={10} xs={12} sx={{ display: "inset" }}>
+          <Container>
+            <ConversationWrapper>
+              <Conversation channel={selectedChannel} messages={messages} users={users} />
+            </ConversationWrapper>
+          </Container>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

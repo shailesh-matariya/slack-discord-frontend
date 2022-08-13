@@ -8,7 +8,7 @@ const ChatPage = () => {
 
   return (
     <>
-      <Chat id={id} />
+      <Chat />
     </>
   )
 }

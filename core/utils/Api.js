@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // export const API_URL = process.env.NEXT_PUBLIC_API_URL;
-export const API_URL = 'http://192.168.29.155:8000/api';
+export const API_URL = 'http://192.168.29.5:8000/api';
 export const httpClient = axios.create({
   baseURL: API_URL,
   headers: {

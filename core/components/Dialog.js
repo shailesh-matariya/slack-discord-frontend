@@ -25,7 +25,6 @@ const UserName = ({ name }) => {
 
 const Dialog = ({ msgDetail, users }) => {
   const [user] = users.filter((user) => user.userId === msgDetail.userId);
-  console.log(msgDetail);
   return (
     <>
       <div key={msgDetail.id}>
@@ -41,7 +40,7 @@ const Dialog = ({ msgDetail, users }) => {
               avatar={
                 <Avatar
                   sx={{ bgcolor: red[500], mt: 0, width: 32, height: 32 }}
-                  src={user.profile}
+                  src={user?.profile}
                   aria-label="Profile"
                 />
               }
@@ -59,7 +58,7 @@ const Dialog = ({ msgDetail, users }) => {
                     fontWeight: 500,
                   }}
                 >
-                  {user.username}
+                  {user?.username}
                 </Typography>
               }
               sx={{ alignItems: "flex-start", pb: 0 }}
@@ -73,10 +72,10 @@ const Dialog = ({ msgDetail, users }) => {
                   fontSize: "14px",
                 }}
               >
-                {user.username}
-                {msgDetail.message.split(">")[1]}
+                {user?.username}
+                {msgDetail?.message.split(">")[1]}
                 <br></br>
-                {msgDetail.message}
+                {msgDetail?.message}
               </Box>
             </CardContent>
             <CardActions sx={{ ml: 7 }}>

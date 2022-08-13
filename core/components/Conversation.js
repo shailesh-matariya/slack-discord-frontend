@@ -1,17 +1,7 @@
 import { Typography } from "@mui/material";
 import Dialog from "./Dialog";
-import { useRouter } from "next/router";
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 
-const Conversation = ({ messages, users }) => {
-  // const data = [{
-  //   id: 1, user: { id: 1, name: 'User 1' }, date: '2021-10-12'
-  // }, {
-  //   id: 2, user: { id: 2, name: 'User 2' }, date: '2021-10-13'
-  // }]
-
-  // const detail = { ...messages, ...users };
-  // console.log(detail);
+const Conversation = ({ channel, messages, users }) => {
   return (
     <>
       <Typography
@@ -19,11 +9,7 @@ const Conversation = ({ messages, users }) => {
         color="text.secondary"
         sx={{ mt: 3, mb: 2 }}
       >
-        This is the beginning of the #{" "}
-        {typeof window !== "undefined" && (
-          <span>{window.location.pathname.split("chat/")[1]}</span>
-        )}{" "}
-        channel
+        `This is the beginning of the #{channel?.name} channel`
       </Typography>
 
       {messages.map((item) => (
