@@ -5,13 +5,14 @@ import Conversation from "../../core/components/Conversation";
 import { styled, alpha } from "@mui/material/styles";
 import { httpClient } from "../../core/utils/Api";
 import { useEffect, useState } from "react";
-import Head from 'next/head';
+import Head from "next/head";
 
 const msgList = [
   {
     id: 1,
     account_channel_id: 1,
-    message: "<@U03SMDS1SUA>, <@U03RPSESW1M>, <@U03S6SH5W0L>  has joined the channel",
+    message:
+      "<@U03SMDS1SUA>, <@U03RPSESW1M>, <@U03S6SH5W0L>  has joined the channel",
     type: "message",
     userId: "U03SMDS1SUA",
     ts: "1660025371.233229",
@@ -72,7 +73,7 @@ const msgList = [
   {
     id: 7,
     account_channel_id: 1,
-    message: "<@U03SU5F76GG>, <@U03RPSESW1M> has joined the channel",
+    message: "<@U03SU5F76GG> has jcalc(100vh - 138px)oined the channel",
     type: "message",
     userId: "U03SU5F76GG",
     ts: "1659556446.724389",
@@ -147,7 +148,7 @@ const Chat = ({ id }) => {
         if (!id) {
           ch = channels[0];
         } else {
-          ch = channels.find(ch => ch.channelId === id || ch.name === id);
+          ch = channels.find((ch) => ch.channelId === id || ch.name === id);
         }
 
         setSelectedChannel(ch);
@@ -157,8 +158,10 @@ const Chat = ({ id }) => {
 
   const getMassages = (chId) => {
     httpClient
-    .get(`/channel-messages?platform=slack&team_id=T03SH2Y8PJM&channel_id=${chId}`)
-    .then((resp) => setMessages(resp.data.message_collection.data));
+      .get(
+        `/channel-messages?platform=slack&team_id=T03SH2Y8PJM&channel_id=${chId}`
+      )
+      .then((resp) => setMessages(resp.data.message_collection.data));
     // setMessages(msgList);
   };
 
@@ -198,10 +201,23 @@ const Chat = ({ id }) => {
           <Channels list={channels} />
         </Grid>
 
-        <Grid item md={10} xs={12} sx={{ display: "inset" }}>
+        <Grid
+          item
+          md={10}
+          xs={12}
+          sx={{
+            display: "inset",
+            overflow: "auto",
+            height: "calc(100vh - 80px)",
+          }}
+        >
           <Container>
             <ConversationWrapper>
-              <Conversation channel={selectedChannel} messages={messages} users={users} />
+              <Conversation
+                channel={selectedChannel}
+                messages={messages}
+                users={users}
+              />
             </ConversationWrapper>
           </Container>
         </Grid>

@@ -11,7 +11,8 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import { Box } from "@mui/system";
-import Emoji, { toArray } from 'react-emoji-render';
+import Emoji, { toArray } from "react-emoji-render";
+import moment from "moment";
 
 const ExpandMore = styled((props) => {
   return <IconButton {...props} sx={{ fontSize: 6 }} />;
@@ -22,7 +23,7 @@ const ExpandMore = styled((props) => {
 
 const Dialog = ({ msgDetail, users }) => {
   const usersMap = {};
-  users.forEach(user => {
+  users.forEach((user) => {
     usersMap[user.userId] = user;
   });
 
@@ -32,7 +33,7 @@ const Dialog = ({ msgDetail, users }) => {
     return `<strong>@${usersMap[p1]?.username}</strong>`;
   });
 
-  const parseEmojis = value => {
+  const parseEmojis = (value) => {
     const emojisArray = toArray(value);
 
     // toArray outputs React elements for emojis and strings for other
@@ -48,13 +49,14 @@ const Dialog = ({ msgDetail, users }) => {
 
   return (
     <>
-      <div key={msgDetail.id}>
+      <div key={msgDetail.id} sx={{ width: { xs: "100%", md: 700 } }}>
         <Link href="#" sx={{ textDecoration: "none", mb: 4 }}>
           <Card
             sx={{
               boxShadow: "none",
               borderTop: "1px solid rgb(229, 231, 235)",
-              maxWidth: 700,
+              maxWidth: { md: 700 },
+              minWidth: 700,
             }}
           >
             <CardHeader
@@ -66,8 +68,11 @@ const Dialog = ({ msgDetail, users }) => {
                 />
               }
               action={
-                <Typography variant="subtitle2" color="text.secondary" sx={{}}>
-                  3 months ago
+                <Typography
+                  variant="subtitle2"
+                  sx={{ fontWeight: 400, color: "#999999" }}
+                >
+                  {moment(msgDetail?.ts * 1000).fromNow()}
                 </Typography>
               }
               title={
@@ -93,10 +98,12 @@ const Dialog = ({ msgDetail, users }) => {
                   fontSize: "14px",
                 }}
               >
-                <div dangerouslySetInnerHTML={{ __html: parseEmojis(message) }}></div>
+                <div
+                  dangerouslySetInnerHTML={{ __html: parseEmojis(message) }}
+                ></div>
               </Box>
             </CardContent>
-            <CardActions sx={{ ml: 7 }}>
+            {/* <CardActions sx={{ ml: 7 }}>
               <AvatarGroup max={4}>
                 <Avatar
                   alt="Remy Sharp"
@@ -116,7 +123,7 @@ const Dialog = ({ msgDetail, users }) => {
               <ExpandMore aria-label="show more" sx={{ p: 0 }}>
                 <AttachFileOutlinedIcon color="primary" fontSize="small" />
               </ExpandMore>
-            </CardActions>
+            </CardActions> */}
           </Card>
         </Link>
       </div>

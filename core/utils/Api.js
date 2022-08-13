@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 // export const API_URL = process.env.NEXT_PUBLIC_API_URL;
-export const API_URL = 'http://192.168.29.5:8000/api';
+export const API_URL = "https://slack-api.cloudcraftsmanship.io/api";
 export const httpClient = axios.create({
   baseURL: API_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -24,13 +24,13 @@ httpClient.interceptors.response.use(
       case 401:
         throw new Error(apiMessage);
       case 500:
-        console.error('Internal Server Error');
+        console.error("Internal Server Error");
         break;
       case 502:
-        console.error('Bad Gateway');
+        console.error("Bad Gateway");
         break;
       case 503:
-        console.error('Service Unavailable');
+        console.error("Service Unavailable");
         break;
       default:
         console.error(apiMessage);
