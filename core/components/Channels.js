@@ -1,13 +1,53 @@
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import {
+  FormControl,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  MenuItem,
+} from "@mui/material";
 import Link from "@mui/material/Link";
 import { styled, alpha } from "@mui/material/styles";
-import { border, borderRight } from "@mui/system";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
 import { useState } from "react";
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 1),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white),
+  },
+  width: "100%",
+  color: "lightgray",
+  marginTop: "20px",
+  padding: "0 25px",
+  // },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#9ca6b4",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    border: "1px solid lightgrey",
+    borderRadius: "4px",
+  },
+}));
 
 const MenuTitle = styled("div")(({ theme }) => ({
   padding: "20px 0 0",
@@ -26,7 +66,9 @@ const ChannellList = styled("div")(({ theme }) => ({
 }));
 
 const ChannelTitle = styled("div")(({ theme }) => ({
-  paddingLeft: "18px",
+  [theme.breakpoints.up("md")]: {
+    paddingLeft: "18px",
+  },
   fontWeight: "bold",
   marginBottom: "15px",
 }));
@@ -48,12 +90,6 @@ const ChannelWrapper = styled("div")(({ theme }) => ({
   marginBottom: "10px",
   fontSize: "small",
   paddingTop: 0,
-  // [theme.breakpoints.up("md")]: {
-  //   display: "block",
-  // },
-  // // [theme.breakpoints.up("xs")]: {
-  // //   display: "none",
-  // // },
 }));
 
 const Channel = ({ ch }) => {
@@ -84,12 +120,23 @@ const Channel = ({ ch }) => {
 
 const Channels = ({ list }) => {
   const [channel, setChannel] = useState("");
-
+  const [state, setstate] = useState();
   const handleChange = (event) => {
     setChannel(event.target.value);
   };
   return (
     <>
+      <Search sx={{ display: { md: "none", xs: "inline-block" } }}>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search messages"
+          inputProps={{ "aria-label": "search" }}
+          sx={{ color: "#090707", fontSize: "medium", width: "100%" }}
+        />
+      </Search>
+
       <ChannellList sx={{ display: "block" }}>
         <ChannelCard>
           <div
@@ -101,11 +148,16 @@ const Channels = ({ list }) => {
           >
             <ChannelTitle>Channels</ChannelTitle>
             <FormControl
-              style={{ width: "100%", outline: "none", padding: "0 18px" }}
+              style={{
+                width: "100%",
+                outline: "none",
+                margin: "0 0",
+                backgroundColor: "lightgrey",
+              }}
               sx={{ display: { md: "none" } }}
             >
               <Select
-                value={channel}
+                value="{channel}"
                 onChange={handleChange}
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}

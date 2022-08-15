@@ -103,27 +103,6 @@ const Dialog = ({ msgDetail, users }) => {
                 ></div>
               </Box>
             </CardContent>
-            {/* <CardActions sx={{ ml: 7 }}>
-              <AvatarGroup max={4}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="/assets/images/avatar1.jpg"
-                  sx={{ width: 32, height: 32 }}
-                />
-                <Avatar
-                  alt="Travis Howard"
-                  src="/assets/images/avatar2.jpg"
-                  sx={{ width: 32, height: 32 }}
-                />
-                <Avatar sx={{ width: 32, height: 32 }}>+1</Avatar>
-              </AvatarGroup>
-              <Link href="#" underline="none" sx={{ fontSize: "small", ml: 2 }}>
-                {"2 replies"}
-              </Link>
-              <ExpandMore aria-label="show more" sx={{ p: 0 }}>
-                <AttachFileOutlinedIcon color="primary" fontSize="small" />
-              </ExpandMore>
-            </CardActions> */}
           </Card>
         </Link>
       </div>

@@ -211,7 +211,7 @@ const Chat = ({ id }) => {
             height: "calc(100vh - 80px)",
           }}
         >
-          <Container>
+          <Container sx={{px:6}}>
             <ConversationWrapper>
               <Conversation
                 channel={selectedChannel}

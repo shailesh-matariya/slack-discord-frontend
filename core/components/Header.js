@@ -17,7 +17,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Button from "@mui/material/Button";
 
-
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -26,13 +25,13 @@ const Search = styled("div")(({ theme }) => ({
     backgroundColor: alpha(theme.palette.common.white),
   },
   marginRight: theme.spacing(2),
-  marginLeft: 0,
+  // marginLeft: 0,
   width: "100%",
   color: "lightgray",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    // width: 'auto',
-  },
+  // [theme.breakpoints.up("sm")]: {
+  marginLeft: "20px",
+  // width: 'auto',
+  // },
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -156,7 +155,7 @@ const Header = () => {
           />
 
           {/* <div sx={{ position: "relative" }}> */}
-          <Search>
+          <Search sx={{ display: { xs: "none", md: "inline-block" } }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -166,23 +165,25 @@ const Header = () => {
               sx={{ color: "#090707", fontSize: "medium" }}
             />
           </Search>
-          {/* </div> */}
 
-          {navItems.map((item) => (
-            <Button
-              key={item}
-              sx={{
-                color: "#fff",
-                fontWeight: "bold",
-                textTransform: "none",
-                fontSize: "medium",
-                display: { xs: "none", sm: "inline-flex" },
-                ml: 2,
-              }}
-            >
-              {item}
-            </Button>
-          ))}
+          {/* </div> */}
+          <div style={{ marginLeft: "auto", display: "inline-flex" }}>
+            {navItems.map((item) => (
+              <Button
+                key={item}
+                sx={{
+                  color: "#fff",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  fontSize: "medium",
+                  display: { xs: "none", sm: "inline-flex" },
+                  ml: 2,
+                }}
+              >
+                {item}
+              </Button>
+            ))}
+          </div>
 
           <Box sx={{ display: { xs: "none", sm: "inline-flex" }, ml: 2 }}>
             <Button
@@ -230,19 +231,6 @@ const Header = () => {
               </Typography>
             </Button>
           </Box>
-
-          {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                    <IconButton
-                        size="large"
-                        aria-label="show more"
-                        aria-controls={mobileMenuId}
-                        aria-haspopup="true"
-                        onClick={handleMobileMenuOpen}
-                        color="inherit"
-                    >
-                        <MoreIcon />
-                    </IconButton>
-                </Box> */}
         </Toolbar>
       </AppBar>
 

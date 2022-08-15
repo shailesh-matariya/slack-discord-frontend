@@ -1,10 +1,9 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import Chat from '../../routes/chat';
+import React from "react";
+import { useRouter } from "next/router";
+import Chat from "../../routes/chat";
 
 const ChatPage = () => {
   const router = useRouter();
-  const { id } = router.query;
 
   if (!router.isReady) return <></>;
 
@@ -12,7 +11,7 @@ const ChatPage = () => {
     <>
       <Chat id={id} />
     </>
-  )
-}
+  );
+};
 
-export default ChatPage
+export default ChatPage;
